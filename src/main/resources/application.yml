@@ -1,0 +1,2 @@
+kafkaApi:
+  basePath: http://epmyy.hnbidocker.ha.unicom.local/epmbase
