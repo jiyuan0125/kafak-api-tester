@@ -3,6 +3,7 @@ package cn.com.bonc.tester.kafkaapi.service.impl;
 import cn.com.bonc.tester.kafkaapi.service.KafkaApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -36,7 +37,8 @@ public class KafkaApiServiceImpl implements KafkaApiService {
         RestTemplate restTemplate = new RestTemplate();
         String basePath = getBasePath();
         String path = String.format("%s/%s", basePath, "getStructuresInfo");
-        ResponseEntity<Map> result = restTemplate.getForEntity(path, Map.class, commandArgs);
+        HttpEntity<Map> request = new HttpEntity<>(commandArgs);
+        ResponseEntity<Map> result = restTemplate.postForEntity(path, request, Map.class);
         return result.toString();
     }
 
